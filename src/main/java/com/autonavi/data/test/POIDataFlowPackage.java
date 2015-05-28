@@ -36,7 +36,7 @@ public class POIDataFlowPackage implements Serializable {
 	
 	private String packageName;
 	
-	/**zA
+	/**
 	 * Get package name
 	 * 
 	 * @return
