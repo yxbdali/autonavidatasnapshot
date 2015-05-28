@@ -5,7 +5,6 @@ package com.autonavi.data.test;
 
 import java.io.Serializable;
 
-import com.thoughtworks.*;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
