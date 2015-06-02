@@ -12,6 +12,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("TableQueryItem")
 public class DbTableQueryConfigItem extends DbDataQueryBase implements Serializable {
+	/**
+	 * Default constructor
+	 * 
+	 */
 	public DbTableQueryConfigItem(){
 		super();
 	}
