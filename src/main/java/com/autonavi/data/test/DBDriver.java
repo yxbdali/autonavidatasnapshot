@@ -85,9 +85,15 @@ public class DBDriver implements AutoCloseable {
 	 * @throws SQLException
 	 */
 	public ResultSet getRecords(String sqlquery) throws SQLException {
-		statement = dbConnection.createStatement();
-		ResultSet resultSet = statement.executeQuery(sqlquery);
-		return resultSet;
+		try {
+			statement = dbConnection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sqlquery);
+			return resultSet;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new SQLException(String.format("Execute '%s' failed\n%s", sqlquery, e.toString()));
+		}
+		
 	}
 
 	/**
@@ -180,7 +186,7 @@ public class DBDriver implements AutoCloseable {
 				for (int i = 1; i <= resultColumn; i++) {
 					String columnName = resultSetMetaData.getColumnName(i);
 					Object valueObject = resultSet.getObject(i);
-					if (columnName.equalsIgnoreCase("GEOM")) {
+					if (columnName.equalsIgnoreCase("GEOM") || columnName.equalsIgnoreCase("ORA_GEOMETRY")) {
 						// continue;
 						if (valueObject != null){
 						STRUCT st = (STRUCT) valueObject;

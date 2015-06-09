@@ -152,4 +152,18 @@ public class UnitTest {
 		log.info("ref_rel_post_third_invl: " + invlArrayList.size());
 	}
 
+	@Test
+	public void testPostLine() throws ClassNotFoundException, IOException{
+		POIDataFlowPackage package1 = POIDataFlowPackage.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/ºóÆÚ1.dat");
+		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
+		int count = 0;
+		for (POIDataItemBase item : dbDataList) {
+			String dbTableName = item.getTableName();
+			if (dbTableName.equalsIgnoreCase("REF_POST_TASKLIST_MAT")){
+				log.info(dbTableName + ":" + item.getDataMap().get("MATERIAL_ID").toString());
+				count++;
+			}
+		}
+		log.info(String.format("Total data count: %d", count));
+	}
 }

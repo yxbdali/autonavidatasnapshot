@@ -20,6 +20,7 @@ com\autonavi\data\test\POITaskPackage.class
 com\autonavi\data\test\InnerTaskDataItem.class
 com\autonavi\data\test\DataFlowItem.class
 com\autonavi\data\test\RollbackHelper.class
+com\autonavi\data\test\unit\NGTest.class
 com\autonavi\data\test\DbDataQueryBase.class
 com\autonavi\data\test\DbQueryHelper.class
 com\autonavi\data\test\POIDataFlowPackage.class

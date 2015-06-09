@@ -107,11 +107,17 @@ public class RollbackHelper {
 				String sqlUpdate = SqlBuilder.buildUpdateSql(tableName, dataMap, rollbackClauseList, clauseDataMap);
 				String sqlInsert = SqlBuilder.buildInsertSql(tableName, dataMap);
 				String sqlSelect = "";
-				if (!dataMap.keySet().contains("GEOM")){
+				if (!dataMap.keySet().contains("GEOM") && !dataMap.keySet().contains("ORA_GEOMETRY")){
 					rollbackSqlList.add(new SqlBundle<Object>(sqlUpdate, sqlInsert, sqlSelect, null));
 				}
 				else {
-					Object geomObj = dataMap.get("GEOM");
+					Object geomObj = null;
+					if (dataMap.containsKey("GEOM")){
+						geomObj = dataMap.get("GEOM");
+					}
+					else {
+						geomObj = dataMap.get("ORA_GEOMETRY");
+					}
 					JGeometry jGeometry = null;
 					if (geomObj != null){
 						jGeometry = (JGeometry)geomObj;

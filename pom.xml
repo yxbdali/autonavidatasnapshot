@@ -19,7 +19,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<!--<scope>test</scope>-->
+			<!--<scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
@@ -46,8 +46,13 @@
 			<artifactId>xstream</artifactId>
 			<version>1.4.8</version>
 		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.4</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

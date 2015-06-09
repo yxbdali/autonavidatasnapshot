@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="E:/MavenLocalRepository/org/apache/logging/log4j/log4j-api/2.2/log4j-api-2.2.jar"/>
 	<classpathentry kind="lib" path="E:/MavenLocalRepository/org/apache/logging/log4j/log4j-core/2.2/log4j-core-2.2.jar"/>
 	<classpathentry kind="lib" path="E:/MavenLocalRepository/junit/junit/4.12/junit-4.12.jar"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
