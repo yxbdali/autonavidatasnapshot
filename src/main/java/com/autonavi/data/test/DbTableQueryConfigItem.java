@@ -20,6 +20,12 @@ public class DbTableQueryConfigItem extends DbDataQueryBase implements Serializa
 		super();
 	}
 	
+	/**
+	 * Constructor with table name and sql query clause
+	 * 
+	 * @param tableName
+	 * @param clause
+	 */
 	public DbTableQueryConfigItem(String tableName, String clause) {
 		// TODO Auto-generated constructor stub
 		super(tableName, clause);

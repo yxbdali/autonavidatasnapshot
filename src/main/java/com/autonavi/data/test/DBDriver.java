@@ -24,8 +24,22 @@ import oracle.sql.STRUCT;
  *
  */
 public class DBDriver implements AutoCloseable {
+	/**
+	 * Default db connection string
+	 * 
+	 */
 	private String defaultDbConnString = "jdbc:oracle:thin:@10.17.129.217:1521:orcl";
+	
+	/**
+	 * Default db user
+	 * 
+	 */
 	private String defaultDbUser = "USER_PTMP_V108";
+	
+	/**
+	 * Default password
+	 * 
+	 */
 	private String defaultDbPassword = "testgdpoi";
 
 	private Connection dbConnection;
@@ -216,6 +230,7 @@ public class DBDriver implements AutoCloseable {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void iniDbConnInfoFromConfig(){
 		String dbConfigFile = System.getProperty("user.dir") + File.separator + "DbConfig.xml";
 		File dbConfigFileObj = new File(dbConfigFile);

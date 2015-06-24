@@ -5,11 +5,11 @@ package com.autonavi.data.test.unit;
 
 import static org.junit.Assert.*;
 
-import java.awt.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +30,7 @@ import com.autonavi.data.test.*;
  */
 public class UnitTest {
 	static Logger log = LogManager.getLogger(UnitTest.class);
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -58,93 +59,102 @@ public class UnitTest {
 	public void tearDown() throws Exception {
 	}
 
+	
 	@Test
 	public void testDataAchievementCatch() throws IOException, ClassNotFoundException {
-		POIDataFlowPackage package1 = POIDataFlowPackage.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试1.dat");
-		POIDataFlowPackage package2 = POIDataFlowPackage.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试2.dat");	
+		POIDataFlowPackage package1 = POIDataFlowPackage
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试1.dat");
+		POIDataFlowPackage package2 = POIDataFlowPackage
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试2.dat");
 		ArrayList<POIDataItemBase> dbDataList1 = package1.getTaskPackageList().get(0).getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList1 = new ArrayList<>();
 		for (POIDataItemBase dataItem : dbDataList1) {
-			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi") || dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")){
+			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi")
+					|| dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")) {
 				achieveDataList1.add(dataItem);
 			}
 		}
-		
+
 		ArrayList<POIDataItemBase> dbDataList2 = package2.getTaskPackageList().get(0).getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList2 = new ArrayList<>();
-		for(POIDataItemBase dataItem : dbDataList2){
-			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi") || dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")){
+		for (POIDataItemBase dataItem : dbDataList2) {
+			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi")
+					|| dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")) {
 				achieveDataList2.add(dataItem);
 			}
 		}
-		
+
 		log.info(String.format("package1 contains %d items", achieveDataList1.size()));
 		log.info(String.format("package2 contains %d items", achieveDataList2.size()));
-		//assertEquals(achieveDataList1.size(), achieveDataList2.size());
+		// assertEquals(achieveDataList1.size(), achieveDataList2.size());
 	}
-	
+
 	@Test
-	public void testDataAchieveCatch() throws FileNotFoundException, IOException, SQLException{
+	public void testDataAchieveCatch() throws FileNotFoundException, IOException, SQLException {
 		POIDataFlowPackage poiDataFlowPackage = new POIDataFlowPackage("Test1");
-		DbDataFlowQueryConfigItem dbDataFlowQueryConfigItem = DbDataFlowQueryConfigItem.xstreamDeserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataQueries/POI.xml");
+		DbDataFlowQueryConfigItem dbDataFlowQueryConfigItem = DbDataFlowQueryConfigItem
+				.xstreamDeserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataQueries/POI.xml");
 		DbTaskQueryConfigItem queryConfigItem = dbDataFlowQueryConfigItem.getTaskDataQueryConfigList().get(0);
 		DbQueryHelper dbQueryHelper = new DbQueryHelper(queryConfigItem, "CA96F0EBB6084AC8962DA21C084AA7BB");
 		POITaskPackage poiTaskPackage = dbQueryHelper.query();
 		poiDataFlowPackage.Add(poiTaskPackage);
-		
+
 		ArrayList<POIDataItemBase> dbDataList = poiTaskPackage.getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList = new ArrayList<>();
 
-		for(POIDataItemBase dataItem : dbDataList){
-			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi") || dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")){
+		for (POIDataItemBase dataItem : dbDataList) {
+			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi")
+					|| dataItem.getTableName().equalsIgnoreCase("mdb_poi_chargepile")) {
 				achieveDataList.add(dataItem);
 			}
 		}
-		
-		//assertEquals(0, achieveDataList.size());
+
+		// assertEquals(0, achieveDataList.size());
 	}
-	
+
 	@Test
 	public void testCheckMarkDataSave() throws ClassNotFoundException, IOException {
-		POIDataFlowPackage package1 = POIDataFlowPackage.deserialize("D:/JavaTools/MyTools/DataFlowSnaphsot12.1/DataFlowPackages/本部.dat");
+		POIDataFlowPackage package1 = POIDataFlowPackage
+				.deserialize("D:/JavaTools/MyTools/DataFlowSnaphsot12.1/DataFlowPackages/本部.dat");
 		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(10).getDbDataList();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
-			if (dbTableName.equalsIgnoreCase("mdb_poi_chargepile")){
-				//log.info(item.getDataMap().get("TAG_ATTR_ID").toString());
+			if (dbTableName.equalsIgnoreCase("mdb_poi_chargepile")) {
+				// log.info(item.getDataMap().get("TAG_ATTR_ID").toString());
 				log.info(item.getDataMap().get("CGUID"));
 			}
 		}
 	}
-	
+
 	@Test
 	public void testSpecial() throws ClassNotFoundException, IOException {
-		POIDataFlowPackage package1 = POIDataFlowPackage.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/专项测试包4.dat");
+		POIDataFlowPackage package1 = POIDataFlowPackage
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/专项测试包4.dat");
 		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
 		ArrayList<POIDataItemBase> matArrayList = new ArrayList<>();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
-			if (dbTableName.equalsIgnoreCase("ref_post_third_mat")){
+			if (dbTableName.equalsIgnoreCase("ref_post_third_mat")) {
 				log.info(dbTableName + ":" + item.getDataMap().get("MATERIAL_ID").toString());
 				matArrayList.add(item);
 			}
 		}
-		//log.info("ref_post_third_mat: " + matArrayList.size());
-		
+		// log.info("ref_post_third_mat: " + matArrayList.size());
+
 		ArrayList<POIDataItemBase> simiArrayList = new ArrayList<>();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
-			if (dbTableName.equalsIgnoreCase("ref_rel_post_third_simi")){
+			if (dbTableName.equalsIgnoreCase("ref_rel_post_third_simi")) {
 				log.info(dbTableName + ":" + item.getDataMap().get("MATERIAL_ID").toString());
 				simiArrayList.add(item);
 			}
 		}
 		log.info("ref_rel_post_third_simi: " + simiArrayList.size());
-		
+
 		ArrayList<POIDataItemBase> invlArrayList = new ArrayList<>();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
-			if (dbTableName.equalsIgnoreCase("ref_rel_post_third_invl")){
+			if (dbTableName.equalsIgnoreCase("ref_rel_post_third_invl")) {
 				log.info(dbTableName + ":" + item.getDataMap().get("MATERIAL_ID").toString());
 				invlArrayList.add(item);
 			}
@@ -153,17 +163,29 @@ public class UnitTest {
 	}
 
 	@Test
-	public void testPostLine() throws ClassNotFoundException, IOException{
-		POIDataFlowPackage package1 = POIDataFlowPackage.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期1.dat");
+	public void testPostLine() throws ClassNotFoundException, IOException {
+		System.out.println("*****************");
+		log.info("********************");
+		POIDataFlowPackage package1 = POIDataFlowPackage
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/专项成果表.dat");
 		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
+		List<String> tableNameList = new ArrayList<>();
 		int count = 0;
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
-			if (dbTableName.equalsIgnoreCase("REF_POST_TASKLIST_MAT")){
-				log.info(dbTableName + ":" + item.getDataMap().get("MATERIAL_ID").toString());
+			System.out.println(dbTableName);
+			if (!tableNameList.contains(dbTableName)) {
+				tableNameList.add(dbTableName);
+			}
+			if (dbTableName.equalsIgnoreCase("MDB_POI")) {
+				log.info(dbTableName + ":" + item.getDataMap().get("GUID").toString());
 				count++;
 			}
 		}
 		log.info(String.format("Total data count: %d", count));
+
+		for (String tableName : tableNameList) {
+			log.info(String.format("TableName: %s", tableName));
+		}
 	}
 }

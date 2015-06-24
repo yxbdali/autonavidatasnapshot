@@ -17,10 +17,19 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  *
  */
 public class DbDataQueryBase implements Serializable {
-	public DbDataQueryBase(){
-		
+	/**
+	 * Default Constructor
+	 * 
+	 */
+	public DbDataQueryBase(){		
 	}
 	
+	/**
+	 * Constructor with table name and sql query clause
+	 * 
+	 * @param tableName
+	 * @param clause
+	 */
 	public DbDataQueryBase(String tableName, String clause) {
 		// TODO Auto-generated constructor stub
 		this.tableName = tableName;
