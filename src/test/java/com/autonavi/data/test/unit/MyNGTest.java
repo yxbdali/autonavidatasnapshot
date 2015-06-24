@@ -24,7 +24,7 @@ public class MyNGTest {
 	@Test
 	public void testSpecialAchrieveData() throws ClassNotFoundException, IOException {
 		POIDataFlowPackage package1 = POIDataFlowPackage
-				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期生成20150623-03.dat");
+				.deserialize("E:/eclipse-luna/AutonaviDataFlowSnapshotCmd/target/classes/DataFlowPackages/后期生产线-238267FD8EB2422BB93640675BA59C93-2015-06-24 16-58-44.dat");
 		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
 		Map<String, Integer> tableDataCountMap = new HashMap<String, Integer>();
 		for (POIDataItemBase item : dbDataList) {
