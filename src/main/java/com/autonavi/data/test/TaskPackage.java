@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
+import java.util.List;
+import java.util.Map;
+
 import com.autonavi.test.yxb.lib.BinarySerializeUtils;
 
 /**
@@ -124,14 +127,14 @@ public class TaskPackage implements Serializable {
 		this.taskType = taskType;
 	}
 
-	private ArrayList<PDAPOIDataItem> pdaPOIDataItemList;
+	private List<PDAPOIDataItem> pdaPOIDataItemList;
 
 	/**
 	 * Get PDA POI data item list
 	 * 
 	 * @return
 	 */
-	public ArrayList<PDAPOIDataItem> getPDAPOIDataItemList() {
+	public List<PDAPOIDataItem> getPDAPOIDataItemList() {
 		if (pdaPOIDataItemList == null) {
 			pdaPOIDataItemList = new ArrayList<>();
 		}
@@ -143,18 +146,18 @@ public class TaskPackage implements Serializable {
 	 * 
 	 * @param pdaPOIDataItemList
 	 */
-	public void setPDAPOIDataItemList(ArrayList<PDAPOIDataItem> pdaPOIDataItemList) {
+	public void setPDAPOIDataItemList(List<PDAPOIDataItem> pdaPOIDataItemList) {
 		this.pdaPOIDataItemList = pdaPOIDataItemList;
 	}
 
-	private ArrayList<DataFlowItem> dataFlowItemList;
+	private List<DataFlowItem> dataFlowItemList;
 
 	/**
 	 * Get data flow item list
 	 * 
 	 * @return
 	 */
-	public ArrayList<DataFlowItem> getDataFlowItemList() {
+	public List<DataFlowItem> getDataFlowItemList() {
 		if (dataFlowItemList == null) {
 			dataFlowItemList = new ArrayList<>();
 		}
@@ -166,7 +169,7 @@ public class TaskPackage implements Serializable {
 	 * 
 	 * @param dataFlowItemList
 	 */
-	public void setDataFlowItemList(ArrayList<DataFlowItem> dataFlowItemList) {
+	public void setDataFlowItemList(List<DataFlowItem> dataFlowItemList) {
 		this.dataFlowItemList = dataFlowItemList;
 	}
 
@@ -212,15 +215,15 @@ public class TaskPackage implements Serializable {
 		innertTask.getInnerTaskDataItem(taskId);
 
 		try (DBDriver dbDriver = new DBDriver()) {
-			ArrayList<PDAPOIDataItem> pdapoiDataItemList = new ArrayList<>();
-			ArrayList<DataFlowItem> dataFlowItemList = new ArrayList<>();
-			ArrayList<HashMap<String, Object>> poiDatas = dbDriver.getDataSetList(sql);
-			ArrayList<HashMap<String, Object>> dataFlows = dbDriver.getDataSetList(sqlQueryDataFlow);
-			for (HashMap<String, Object> poiData : poiDatas) {
+			List<PDAPOIDataItem> pdapoiDataItemList = new ArrayList<>();
+			List<DataFlowItem> dataFlowItemList = new ArrayList<>();
+			List<Map<String, Object>> poiDatas = dbDriver.getDataSetList(sql);
+			List<Map<String, Object>> dataFlows = dbDriver.getDataSetList(sqlQueryDataFlow);
+			for (Map<String, Object> poiData : poiDatas) {
 				PDAPOIDataItem pdapoiDataItem = new PDAPOIDataItem(poiData);
 				pdapoiDataItemList.add(pdapoiDataItem);
 			}
-			for(HashMap<String, Object> dataFlow : dataFlows) {
+			for(Map<String, Object> dataFlow : dataFlows) {
 				DataFlowItem dataFlowItem = new DataFlowItem(dataFlow);
 				dataFlowItemList.add(dataFlowItem);
 			}
@@ -249,7 +252,7 @@ public class TaskPackage implements Serializable {
 	 */
 	public static TaskPackage deserialize(String file) throws ClassNotFoundException, IOException {
 		TaskPackage taskPackage = (TaskPackage) BinarySerializeUtils.deserialize(file);
-		HashMap<String, Object> dataMap = taskPackage.taskItem.getDataHashMap();
+		Map<String, Object> dataMap = taskPackage.taskItem.getDataHashMap();
 		taskPackage.setTaskId((String) dataMap.get("TASK_ID"));
 		taskPackage.setTaskName((String) dataMap.get("TASK_NAME"));
 		taskPackage.setTaskType((String) dataMap.get("TASK_TYPE"));

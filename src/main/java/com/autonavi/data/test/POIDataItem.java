@@ -5,6 +5,7 @@ package com.autonavi.data.test;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -14,7 +15,7 @@ import javafx.beans.property.StringProperty;
  *
  */
 public class POIDataItem extends POIDataItemBase implements Serializable {
-	public POIDataItem(String poiId, String poiChnName, HashMap<String, Object> dataMap) {
+	public POIDataItem(String poiId, String poiChnName, Map<String, Object> dataMap) {
 		// TODO Auto-generated constructor stub
 		setDataMap(dataMap);
 		this.poiChnName = poiChnName;

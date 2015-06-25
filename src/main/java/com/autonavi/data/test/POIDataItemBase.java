@@ -5,6 +5,7 @@ package com.autonavi.data.test;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author xiangbin.yang
@@ -32,14 +33,14 @@ public class POIDataItemBase implements Serializable {
 		this.tableName = tableName;
 	}
 
-	private HashMap<String, Object> dataMap;
+	private Map<String, Object> dataMap;
 
 	/**
 	 * Get data map
 	 * 
 	 * @return
 	 */
-	public HashMap<String, Object> getDataMap() {
+	public Map<String, Object> getDataMap() {
 		if (dataMap == null) {
 			dataMap = new HashMap<String, Object>();
 		}
@@ -51,7 +52,7 @@ public class POIDataItemBase implements Serializable {
 	 * 
 	 * @param dataMap
 	 */
-	public void setDataMap(HashMap<String, Object> dataMap) {
+	public void setDataMap(Map<String, Object> dataMap) {
 		this.dataMap = dataMap;
 	}
 }

@@ -5,6 +5,7 @@ package com.autonavi.data.test;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author xiangbin.yang
@@ -24,7 +25,7 @@ public class PDAPOIDataItem extends DbDataItemBase {
 	 * 
 	 * @param dataMap
 	 */
-	public PDAPOIDataItem(HashMap<String, Object> dataMap) {
+	public PDAPOIDataItem(Map<String, Object> dataMap) {
 		// TODO Auto-generated constructor stub
 		super(dataMap);
 	}

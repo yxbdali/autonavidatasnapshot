@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.autonavi.test.yxb.lib.BinarySerializeUtils;
 
@@ -31,7 +32,7 @@ public class DbDataItemBase implements Serializable {
 	 * 
 	 * @param dataHashMap
 	 */
-	public DbDataItemBase(HashMap<String, Object> dataHashMap) {
+	public DbDataItemBase(Map<String, Object> dataHashMap) {
 		// TODO Auto-generated constructor stub
 		this.dataHashMap = dataHashMap;
 	}
@@ -56,14 +57,14 @@ public class DbDataItemBase implements Serializable {
 		this.saveDate = saveDate;
 	}
 	
-	private HashMap<String, Object> dataHashMap;
+	private Map<String, Object> dataHashMap;
 	
 	/**
 	 * Get dataHashMap
 	 * 
 	 * @return
 	 */
-	public HashMap<String, Object> getDataHashMap() {
+	public Map<String, Object> getDataHashMap() {
 		return dataHashMap;
 	}
 	
@@ -72,12 +73,12 @@ public class DbDataItemBase implements Serializable {
 	 * 
 	 * @param dataHashMap
 	 */
-	public void setDataHashMap(HashMap<String, Object> dataHashMap) {
+	public void setDataHashMap(Map<String, Object> dataHashMap) {
 		this.dataHashMap = dataHashMap;
 	}
 	
 	public void getDbDataItem(String sql) {
-		HashMap<String, Object> dataHashMap = null;
+		Map<String, Object> dataHashMap = null;
 		DbDataItemBase dbDataItemBase = null;
 		
 		try(DBDriver myDbDriver = new DBDriver()) {	

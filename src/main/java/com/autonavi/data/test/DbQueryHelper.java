@@ -6,6 +6,8 @@ package com.autonavi.data.test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xiangbin.yang
@@ -53,7 +55,7 @@ public class DbQueryHelper {
 		String taskQueryClause = taskQueryConfigItem.getClause();
 		String taskName = "";
 
-		HashMap<String, Object> taskDataMap = null;
+		Map<String, Object> taskDataMap = null;
 
 		try (DBDriver dbDriver = new DBDriver(connection, user, password)) {
 			String sql = String.format("SELECT * FROM %s %s", taskTableName, taskQueryClause).replace("[TASKID]",
@@ -70,9 +72,9 @@ public class DbQueryHelper {
 			String sql = String.format("SELECT * FROM %s %s", tableName, dbTableQueryConfigItem.getClause()).replace(
 					"[TASKID]", taskId);
 			try (DBDriver dbDriver = new DBDriver(connection, user, password)) {
-				ArrayList<HashMap<String, Object>> dataMapList = dbDriver.getDataSetList(sql);
+				List<Map<String, Object>> dataMapList = dbDriver.getDataSetList(sql);
 				if (tableName.equalsIgnoreCase("mdb_poi_edit")) {
-					for (HashMap<String, Object> dataMap : dataMapList) {
+					for (Map<String, Object> dataMap : dataMapList) {
 
 						String poiId = (String) dataMap.get("GUID");
 						String chnName = (String) dataMap.get("NAME");
@@ -83,7 +85,7 @@ public class DbQueryHelper {
 
 					}
 				} else {
-					for (HashMap<String, Object> dataMap : dataMapList) {
+					for (Map<String, Object> dataMap : dataMapList) {
 						POIDataItemBase dbDataItem = new POIDataItemBase();
 						dbDataItem.setTableName(tableName);
 						dbDataItem.setDataMap(dataMap);

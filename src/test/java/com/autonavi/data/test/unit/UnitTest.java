@@ -66,7 +66,7 @@ public class UnitTest {
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试1.dat");
 		POIDataFlowPackage package2 = POIDataFlowPackage
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/成果表测试2.dat");
-		ArrayList<POIDataItemBase> dbDataList1 = package1.getTaskPackageList().get(0).getDbDataList();
+		List<POIDataItemBase> dbDataList1 = package1.getTaskPackageList().get(0).getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList1 = new ArrayList<>();
 		for (POIDataItemBase dataItem : dbDataList1) {
 			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi")
@@ -75,7 +75,7 @@ public class UnitTest {
 			}
 		}
 
-		ArrayList<POIDataItemBase> dbDataList2 = package2.getTaskPackageList().get(0).getDbDataList();
+		List<POIDataItemBase> dbDataList2 = package2.getTaskPackageList().get(0).getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList2 = new ArrayList<>();
 		for (POIDataItemBase dataItem : dbDataList2) {
 			if (dataItem.getTableName().equalsIgnoreCase("mdb_poi")
@@ -99,7 +99,7 @@ public class UnitTest {
 		POITaskPackage poiTaskPackage = dbQueryHelper.query();
 		poiDataFlowPackage.Add(poiTaskPackage);
 
-		ArrayList<POIDataItemBase> dbDataList = poiTaskPackage.getDbDataList();
+		List<POIDataItemBase> dbDataList = poiTaskPackage.getDbDataList();
 		ArrayList<POIDataItemBase> achieveDataList = new ArrayList<>();
 
 		for (POIDataItemBase dataItem : dbDataList) {
@@ -116,7 +116,7 @@ public class UnitTest {
 	public void testCheckMarkDataSave() throws ClassNotFoundException, IOException {
 		POIDataFlowPackage package1 = POIDataFlowPackage
 				.deserialize("D:/JavaTools/MyTools/DataFlowSnaphsot12.1/DataFlowPackages/本部.dat");
-		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(10).getDbDataList();
+		List<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(10).getDbDataList();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
 			if (dbTableName.equalsIgnoreCase("mdb_poi_chargepile")) {
@@ -130,8 +130,8 @@ public class UnitTest {
 	public void testSpecial() throws ClassNotFoundException, IOException {
 		POIDataFlowPackage package1 = POIDataFlowPackage
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/专项测试包4.dat");
-		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
-		ArrayList<POIDataItemBase> matArrayList = new ArrayList<>();
+		List<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
+		List<POIDataItemBase> matArrayList = new ArrayList<>();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
 			if (dbTableName.equalsIgnoreCase("ref_post_third_mat")) {
@@ -168,7 +168,7 @@ public class UnitTest {
 		log.info("********************");
 		POIDataFlowPackage package1 = POIDataFlowPackage
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/专项成果表.dat");
-		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
+		List<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
 		List<String> tableNameList = new ArrayList<>();
 		int count = 0;
 		for (POIDataItemBase item : dbDataList) {

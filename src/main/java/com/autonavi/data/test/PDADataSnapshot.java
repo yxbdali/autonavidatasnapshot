@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -38,7 +39,7 @@ public class PDADataSnapshot implements Serializable {
 	 */
 	public String getGuid() {
 		if (guid == null) {
-			HashMap<String, Object> dataHashMap = pdapoiDataSnapshot.getDataHashMap();
+			Map<String, Object> dataHashMap = pdapoiDataSnapshot.getDataHashMap();
 			if (dataHashMap != null) {
 				guid = new SimpleStringProperty((String) pdapoiDataSnapshot.getDataHashMap().get("GUID"));
 			}

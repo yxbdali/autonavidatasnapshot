@@ -30,7 +30,7 @@ public class MyNGTest {
 	public void testSpecialAchrieveData() throws ClassNotFoundException, IOException {
 		POIDataFlowPackage package1 = POIDataFlowPackage
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期1112.dat");
-		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
+		List<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
 		Map<String, Integer> tableDataCountMap = new HashMap<String, Integer>();
 		for (POIDataItemBase item : dbDataList) {
 			String dbTableName = item.getTableName();
@@ -57,9 +57,9 @@ public class MyNGTest {
 		POIDataFlowPackage package1 = POIDataFlowPackage
 				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期测试1.dat");
 		DbDataFlowQueryConfigItem dbDataFlowQueryConfigItem = DbDataFlowQueryConfigItem.xstreamDeserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataQueries/PostLine.xml");
-		ArrayList<POIDataItem> poiDataList = package1.getTaskPackageList().get(0).getPOIDataList();
+		List<POIDataItem> poiDataList = package1.getTaskPackageList().get(0).getPOIDataList();
 		for (POIDataItem poiDataItem : poiDataList) {
-			HashMap<String, Object> poiDataMap = poiDataItem.getDataMap();
+			Map<String, Object> poiDataMap = poiDataItem.getDataMap();
 			String poiTableName = poiDataItem.getTableName();
 			DbTableQueryConfigItem poiEditDbTableQueryConfigItem = RollbackHelper.findDbTableQueryConfigItem(dbDataFlowQueryConfigItem, poiTableName);
 			ArrayList<String> rollbackClauseList = poiEditDbTableQueryConfigItem.getRollbackQueryClauseFieldList();

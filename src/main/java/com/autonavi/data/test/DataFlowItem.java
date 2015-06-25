@@ -4,6 +4,7 @@
 package com.autonavi.data.test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author xiangbin.yang
@@ -19,7 +20,7 @@ public class DataFlowItem extends DbDataItemBase {
 	 * 
 	 * @param dataMap
 	 */
-	public DataFlowItem(HashMap<String, Object> dataMap){
+	public DataFlowItem(Map<String, Object> dataMap){
 		super(dataMap);
 	}
 	

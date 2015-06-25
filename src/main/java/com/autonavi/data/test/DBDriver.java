@@ -15,6 +15,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import oracle.spatial.geometry.JGeometry;
 import oracle.sql.STRUCT;
@@ -157,8 +159,8 @@ public class DBDriver implements AutoCloseable {
 	 * @return
 	 * @throws SQLException
 	 */
-	public HashMap<String, Object> getFirstDataSet(String sql) throws SQLException {
-		HashMap<String, Object> dataMap = new HashMap<>();
+	public Map<String, Object> getFirstDataSet(String sql) throws SQLException {
+		Map<String, Object> dataMap = new HashMap<>();
 
 		try (ResultSet resultSet = getRecords(sql)) {
 			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
@@ -189,8 +191,8 @@ public class DBDriver implements AutoCloseable {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<HashMap<String, Object>> getDataSetList(String sql) throws SQLException {
-		ArrayList<HashMap<String, Object>> dataSetList = new ArrayList<>();
+	public List<Map<String, Object>> getDataSetList(String sql) throws SQLException {
+		List<Map<String, Object>> dataSetList = new ArrayList<>();
 
 		try (ResultSet resultSet = getRecords(sql)) {
 			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();

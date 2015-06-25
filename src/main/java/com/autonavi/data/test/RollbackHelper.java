@@ -6,6 +6,8 @@ package com.autonavi.data.test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.management.OperationsException;
 
@@ -45,7 +47,7 @@ public class RollbackHelper {
 			String connection, String user, String password) throws OperationsException, SQLException {
 		String taskTableName = poiTaskPackage.getTableName();
 		String taskId = poiTaskPackage.getTaskId();
-		HashMap<String, Object> taskDataMap = poiTaskPackage.getDataMap();
+		Map<String, Object> taskDataMap = poiTaskPackage.getDataMap();
 
 		String taskRollbackSql = SqlBuilder.buildUpdateSql(taskTableName, taskDataMap, "TASK_ID", taskId);
 		String taskRollbackSqlInsert = SqlBuilder.buildInsertSql(taskTableName, taskDataMap);
@@ -63,11 +65,11 @@ public class RollbackHelper {
 			dbDriver.executeSql(taskRollbackSqlBundle.getSqlInsert());
 		}
 
-		ArrayList<POIDataItem> poiDataList = poiTaskPackage.getPOIDataList();
+		List<POIDataItem> poiDataList = poiTaskPackage.getPOIDataList();
 		ArrayList<SqlBundle<JGeometry>> poiRollbackList = new ArrayList<>();
 		for (POIDataItem poiDataItem : poiDataList) {
 			String poiGuid = poiDataItem.getPOIId();
-			HashMap<String, Object> poiDataMap = poiDataItem.getDataMap();
+			Map<String, Object> poiDataMap = poiDataItem.getDataMap();
 			String poiTableName = poiDataItem.getTableName();
 			DbTableQueryConfigItem poiEditDbTableQueryConfigItem = findDbTableQueryConfigItem(dbDataFlowQueryConfigItem, poiTableName);
 			ArrayList<String> rollbackClauseList = poiEditDbTableQueryConfigItem.getRollbackQueryClauseFieldList();
@@ -95,12 +97,12 @@ public class RollbackHelper {
 		}
 		System.out.println("Rollback poi data done!");
 
-		ArrayList<POIDataItemBase> dataList = poiTaskPackage.getDbDataList();
+		List<POIDataItemBase> dataList = poiTaskPackage.getDbDataList();
 		ArrayList<SqlBundle<Object>> rollbackSqlList = new ArrayList<>();
 		ArrayList<SqlBundle<JGeometry>> geomRollbackSqlList = new ArrayList<>();
 		for (POIDataItemBase poiDataItemBase : dataList) {
 			String tableName = poiDataItemBase.getTableName();
-			HashMap<String, Object> dataMap = poiDataItemBase.getDataMap();
+			Map<String, Object> dataMap = poiDataItemBase.getDataMap();
 			DbTableQueryConfigItem dbTableQueryConfigItem = findDbTableQueryConfigItem(dbDataFlowQueryConfigItem,
 					tableName);
 			if (dbTableQueryConfigItem != null) {

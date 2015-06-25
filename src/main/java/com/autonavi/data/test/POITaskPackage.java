@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -31,7 +33,7 @@ public class POITaskPackage extends POIDataItemBase implements Serializable {
 	 * @param poiDataList
 	 * @param dbDataList
 	 */
-	public POITaskPackage(String taskId, String taskName, String tableName, String dbConfigName, HashMap<String, Object> taskDataMap, ArrayList<POIDataItem> poiDataList, ArrayList<POIDataItemBase> dbDataList) {
+	public POITaskPackage(String taskId, String taskName, String tableName, String dbConfigName, Map<String, Object> taskDataMap, List<POIDataItem> poiDataList, List<POIDataItemBase> dbDataList) {
 		// TODO Auto-generated constructor stub
 		super.setTableName(tableName);
 		super.setDataMap(taskDataMap);
@@ -268,14 +270,14 @@ public class POITaskPackage extends POIDataItemBase implements Serializable {
 	}
 	
 	
-	private ArrayList<POIDataItem> poiDataList;
+	private List<POIDataItem> poiDataList;
 	
 	/**
 	 * Get POI data list
 	 * 
 	 * @return
 	 */
-	public ArrayList<POIDataItem> getPOIDataList() {
+	public List<POIDataItem> getPOIDataList() {
 		if (poiDataList == null){
 			poiDataList = new ArrayList<>();
 		}
@@ -328,14 +330,14 @@ public class POITaskPackage extends POIDataItemBase implements Serializable {
 	}
 	
 	
-	private ArrayList<POIDataItemBase> dbDataList;
+	private List<POIDataItemBase> dbDataList;
 	
 	/**
 	 * Get task's database table data package list
 	 * 
 	 * @return
 	 */
-	public ArrayList<POIDataItemBase> getDbDataList(){
+	public List<POIDataItemBase> getDbDataList(){
 		if (dbDataList == null){
 			dbDataList = new ArrayList<>();
 		}
