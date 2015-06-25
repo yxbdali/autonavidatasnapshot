@@ -66,11 +66,18 @@ public class RollbackHelper {
 		ArrayList<POIDataItem> poiDataList = poiTaskPackage.getPOIDataList();
 		ArrayList<SqlBundle<JGeometry>> poiRollbackList = new ArrayList<>();
 		for (POIDataItem poiDataItem : poiDataList) {
-			String poiTableName = poiDataItem.getTableName();
 			String poiGuid = poiDataItem.getPOIId();
 			HashMap<String, Object> poiDataMap = poiDataItem.getDataMap();
+			String poiTableName = poiDataItem.getTableName();
+			DbTableQueryConfigItem poiEditDbTableQueryConfigItem = findDbTableQueryConfigItem(dbDataFlowQueryConfigItem, poiTableName);
+			ArrayList<String> rollbackClauseList = poiEditDbTableQueryConfigItem.getRollbackQueryClauseFieldList();
+			HashMap<String, Object> clauseDataMap = new HashMap<>();
+			for (String rollbackClause : rollbackClauseList) {
+				Object clauseValue = poiDataMap.get(rollbackClause);
+				clauseDataMap.put(rollbackClause, clauseValue);
+			}
 
-			String poiRollbackSqlUpdate = SqlBuilder.buildUpdateSql(poiTableName, poiDataMap, "GUID", poiGuid);
+			String poiRollbackSqlUpdate = SqlBuilder.buildUpdateSql(poiTableName, poiDataMap, rollbackClauseList, clauseDataMap);
 			String poiRollbackSqlInsert = SqlBuilder.buildInsertSql(poiTableName, poiDataMap);
 			String poiRollbackSqlSelect = "";
 			JGeometry jGeometry = (JGeometry) poiDataMap.get("GEOM");

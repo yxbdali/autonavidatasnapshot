@@ -26,7 +26,11 @@ public class SqlBuilder {
 	private static String getSqlAppendVal(Object valObject){
 		String appendString = "";
 		if (valObject instanceof String){
-			appendString = String.format("'%s'", valObject);
+			String valString = valObject.toString();
+			if (valString.contains("'")){
+				valString.replaceAll("'", "''");
+			}
+			appendString = String.format("'%s'", valString);
 		}
 		else if (valObject instanceof oracle.sql.TIMESTAMP || valObject instanceof Timestamp) {
 			String sValue = valObject.toString();
@@ -101,7 +105,11 @@ public class SqlBuilder {
 			
 			Object value = dataMap.get(key);
 			if (value instanceof String){
-				sqlBuilder.append(key + "=" + "'" + value + "',");
+				String valueString = value.toString();
+				if (valueString.contains("'")){
+					valueString = valueString.replaceAll("'", "''");
+				}
+				sqlBuilder.append(key + "=" + "'" + valueString + "',");
 			} 
 			else if (value instanceof oracle.sql.TIMESTAMP) {
 				String sValue = value.toString();
@@ -168,11 +176,15 @@ public class SqlBuilder {
 				continue;
 			}
 			if (value instanceof String){
+				String valueString = value.toString();
+				if (valueString.contains("'")){
+					valueString = valueString.replaceAll("'", "''");
+				}
 				if (i < keyArray.length - 1){
-					sqlBuilder.append(key + "=" + "'" + value + "',");
+					sqlBuilder.append(key + "=" + "'" + valueString + "',");
 				}
 				else {
-					sqlBuilder.append(key + "=" + "'" + value + "' ");
+					sqlBuilder.append(key + "=" + "'" + valueString + "' ");
 				}
 			}
 			else if (value instanceof oracle.sql.TIMESTAMP || value instanceof Timestamp){

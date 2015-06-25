@@ -9,9 +9,14 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.Test;
+
+import com.autonavi.data.test.DbDataFlowQueryConfigItem;
+import com.autonavi.data.test.DbTableQueryConfigItem;
 import com.autonavi.data.test.POIDataFlowPackage;
 import com.autonavi.data.test.POIDataItem;
 import com.autonavi.data.test.POIDataItemBase;
+import com.autonavi.data.test.RollbackHelper;
+import com.autonavi.data.test.SqlBuilder;
 /**
  * 
  * @author xiangbin.yang
@@ -24,7 +29,7 @@ public class MyNGTest {
 	@Test
 	public void testSpecialAchrieveData() throws ClassNotFoundException, IOException {
 		POIDataFlowPackage package1 = POIDataFlowPackage
-				.deserialize("E:/eclipse-luna/AutonaviDataFlowSnapshotCmd/target/classes/DataFlowPackages/后期生产线-238267FD8EB2422BB93640675BA59C93-2015-06-24 16-58-44.dat");
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期1112.dat");
 		ArrayList<POIDataItemBase> dbDataList = package1.getTaskPackageList().get(0).getDbDataList();
 		Map<String, Integer> tableDataCountMap = new HashMap<String, Integer>();
 		for (POIDataItemBase item : dbDataList) {
@@ -46,4 +51,28 @@ public class MyNGTest {
 		log.info(String.format("Table: %s, DataCount %d", "MDB_POI_Edit", poiDataList.size()));
 	}
 	
+	
+	@Test
+	public void testSqlBulder() throws ClassNotFoundException, IOException{
+		POIDataFlowPackage package1 = POIDataFlowPackage
+				.deserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataFlowPackages/后期测试1.dat");
+		DbDataFlowQueryConfigItem dbDataFlowQueryConfigItem = DbDataFlowQueryConfigItem.xstreamDeserialize("E:/NetBeans_Projects/AutonaviDataFlowSnapshotUI/DataQueries/PostLine.xml");
+		ArrayList<POIDataItem> poiDataList = package1.getTaskPackageList().get(0).getPOIDataList();
+		for (POIDataItem poiDataItem : poiDataList) {
+			HashMap<String, Object> poiDataMap = poiDataItem.getDataMap();
+			String poiTableName = poiDataItem.getTableName();
+			DbTableQueryConfigItem poiEditDbTableQueryConfigItem = RollbackHelper.findDbTableQueryConfigItem(dbDataFlowQueryConfigItem, poiTableName);
+			ArrayList<String> rollbackClauseList = poiEditDbTableQueryConfigItem.getRollbackQueryClauseFieldList();
+			HashMap<String, Object> clauseDataMap = new HashMap<>();
+			for (String rollbackClause : rollbackClauseList) {
+				Object clauseValue = poiDataMap.get(rollbackClause);
+				clauseDataMap.put(rollbackClause, clauseValue);
+			}
+			
+			String sql = SqlBuilder.buildUpdateSql(poiDataItem.getTableName(), poiDataMap,  rollbackClauseList, clauseDataMap);
+			if (poiTableName.equalsIgnoreCase("mdb_poi_edit")){
+				log.info(sql);
+			}
+		}
+	}
 }
